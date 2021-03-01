@@ -41,6 +41,14 @@ import static org.springframework.beans.factory.BeanFactoryUtils.beansOfTypeIncl
 
 /**
  * ReferenceFactoryBean
+ *
+ * Dubbo 服务引用的时机有两个，
+ * 第一个是在 Spring 容器调用 ReferenceBean 的 afterPropertiesSet 方法时引用服务，
+ * 第二个是在 ReferenceBean 对应的服务被注入到其他类中时引用。
+ * 这两个引用服务的时机区别在于，第一个是饿汉式的，第二个是懒汉式的。
+ * 默认情况下，Dubbo 使用懒汉式引用服务。如果需要使用饿汉式，可通过配置 <dubbo:reference> 的 init 属性开启。
+ * 下面我们按照 Dubbo 默认配置(懒汉式)进行分析，整个分析过程从 ReferenceBean 的 getObject 方法开始。
+ * 当我们的服务被注入到其他类中时，Spring 会第一时间调用 getObject 方法，并由该方法执行服务引用逻辑
  */
 public class ReferenceBean<T> extends ReferenceConfig<T> implements FactoryBean,
         ApplicationContextAware, InitializingBean, DisposableBean {

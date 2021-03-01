@@ -25,6 +25,7 @@ import java.util.List;
 
 /**
  * Protocol. (API/SPI, Singleton, ThreadSafe)
+ * Protocol 实现类有很多，可以分析最常用的两个，分别是 RegistryProtocol 和 DubboProtocol
  */
 @SPI("dubbo")
 public interface Protocol {
@@ -54,12 +55,19 @@ public interface Protocol {
 
     /**
      * Refer a remote service: <br>
+     * 引用一个远程服务
+     *
      * 1. When user calls `invoke()` method of `Invoker` object which's returned from `refer()` call, the protocol
      * needs to correspondingly execute `invoke()` method of `Invoker` object <br>
+     * 当用户调用从refer（）调用返回的Invoker对象的invoke（）方法时，协议需要相应地执行Invoker对象的invoke（）方法。
+     *
      * 2. It's protocol's responsibility to implement `Invoker` which's returned from `refer()`. Generally speaking,
      * protocol sends remote request in the `Invoker` implementation. <br>
+     * Protocol 负责实现从referer（）返回的Invoker。一般来说，Protocol在“Invoker”实现中发送远程请求。
+     *
      * 3. When there's check=false set in URL, the implementation must not throw exception but try to recover when
      * connection fails.
+     * 如果在URL中设置了check = false，则实现不得抛出异常，而应尝试在连接失败时恢复。
      *
      * @param <T>  Service type
      * @param type Service class
