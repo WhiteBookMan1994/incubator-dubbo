@@ -1,0 +1,3 @@
+student=org.apache.dubbo.demo.provider.dxctest.spi.Student
+worker=org.apache.dubbo.demo.provider.dxctest.spi.Worker
+programmer=org.apache.dubbo.demo.provider.dxctest.spi.Programmer
