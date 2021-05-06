@@ -75,6 +75,8 @@ public class MonitorFilter implements Filter, Filter.Listener {
     /**
      * The invocation interceptor,it will collect the invoke data about this invocation and send it to monitor center
      *
+     * 调用拦截器，它将收集有关此调用的调用数据并将其发送到监控中心
+     *
      * @param invoker    service
      * @param invocation invocation.
      * @return {@link Result} the invoke result
